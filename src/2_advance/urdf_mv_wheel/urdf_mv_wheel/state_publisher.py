@@ -3,7 +3,6 @@ import rclpy
 from rclpy.node import Node
 # 1.导入消息类型JointState
 from sensor_msgs.msg import JointState
-
 import threading
 import time
 

@@ -81,14 +81,14 @@ std_msgs__msg__Int32MultiArray msg;
 //rclc_publisher_init_default()放在这里
 // 初始化 Int32MultiArray 消息
 std_msgs__msg__Int32MultiArray__init(&multi_array_msg);
-
-// 设置 Int32MultiArray 消息的数据
+//为数组类消息分配内存
 multi_array_msg.data.capacity = 5;
 multi_array_msg.data.size = 5;
 multi_array_msg.data.data = (int32_t *)malloc(sizeof(int32_t) * 5);
-multi_array_msg.data.data[0] = 1;
-multi_array_msg.data.data[1] = 2;
-multi_array_msg.data.data[2] = 3;
-multi_array_msg.data.data[3] = 4;
-multi_array_msg.data.data[4] = 5;
+//或 char array_buf[5];
+// multi_array_msg.data.data=array_buf;
+
 ``` 
+# Tips
+1. 可以使用Freertos创建其他线程，但是最好不要在其中使用micro_ros的内容，包括使用publisher等，会卡死（存疑）
+2. 

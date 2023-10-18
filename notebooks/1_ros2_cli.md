@@ -1,3 +1,27 @@
+# rosdep 安装依赖
+```bash
+rosdepc install -v --rosdistro=humble --from-paths src/package_name
+```
+前提是package.xml里有类似的行：
+`<depend>rclpy</depend>`
+
+# topic
+
+话题相关
+## 查看目前的topic
+```bash
+ros2 topic list
+```
+或用rqt查看
+## 查看topic来源
+```bash
+ros2 topic info /joint_states
+```
+## 查看topic-msg 内容
+```bash
+ros2 interfaces show sensor_msgs/msg/JointState
+```
+
 # 创建功能包
 
 ## eg1:创建一个包含 action 的包

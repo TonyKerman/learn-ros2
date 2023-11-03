@@ -26,5 +26,6 @@ rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
         }
 ```
 ### 通过执行器发布
-执行器见
+见执行器
 
+# 使用subscriber

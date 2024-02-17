@@ -1,6 +1,4 @@
-# ROS2 Study Note
-
-## Install ROS2 with docker
+# Install ROS2 with docker
 
 1. install docker via apt
     <https://www.runoob.com/docker/ubuntu-docker-install.html>
@@ -44,7 +42,7 @@ First micro-ROS Application on FreeRTOS 链接
 
 https://github.com/micro-ROS/micro_ros_stm32cubemx_utils
 
-# 解决RVIZ2黑屏问题
+## 解决RVIZ2黑屏问题
 [https://github.com/ros2/rviz/issues/948]
 
     add-apt-repository ppa:kisak/kisak-mesa && apt install -y mesa-utils && glxgears

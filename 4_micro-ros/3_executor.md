@@ -20,7 +20,7 @@ rclc_executor_add_subscription(&executor, &my_sub, &sub_msg, &my_subscriber_call
 选项 `ON_NEW_DATA` 选择spin-method的执行方式.在此示例中,仅当有新数据可用时才会调用订阅 my_sub 的回调.另一种执行语义是 `ALWAYS` ,这意味着,当执行器的 `spin-method` 被调用时,订阅回调总是被执行.如果回调应以固定速率执行,无论新数据是否可用,此选项可能很有用.如果您选择此选项,则如果没有新数据可用,将使用消息参数 `NULL` 执行回调.因此,您需要确保您的回调也接受 `NULL` 作为消息参数.
 
 也可以添加一个计时器`rclc_executor_add_timer(&executor, &my_timer);`
-### 3.使用
+### 3.spin
 
 `rclc_executor_spin(&executor);`该函数永远运行而不返回.
 

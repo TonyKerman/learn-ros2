@@ -285,9 +285,13 @@ from launch.actions import ExecuteProcess
 ### 执行子launch
 launch可以嵌套
 ```py
+from launch.actions import IncludeLaunchDescription
+from launch.conditions import IfCondition
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import  PythonExpression
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                os.path.join(launch_dir, 'localization_launch.py')
+                os.path.join(launch_dir, 'sub_launch.py')
             ),
             condition=IfCondition(PythonExpression(['not ', slam])),
             launch_arguments={

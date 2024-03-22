@@ -284,6 +284,24 @@ from launch.actions import ExecuteProcess
 * `cwd`:在哪执行命令
 ### 执行子launch
 launch可以嵌套
-
+```py
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(launch_dir, 'localization_launch.py')
+            ),
+            condition=IfCondition(PythonExpression(['not ', slam])),
+            launch_arguments={
+                'namespace': namespace,
+                'map': map_yaml_file,
+                'use_sim_time': use_sim_time,
+                'autostart': autostart,
+                'params_file': params_file,
+                'use_composition': use_composition,
+                'use_respawn': use_respawn,
+                'container_name': 'nav2_container',
+            }.items(),
+        ),
+```
+其中，`namespace`等都是子launch定义的参数
 ## 进阶
 [examples](../ros2_examples/launch_testing/)

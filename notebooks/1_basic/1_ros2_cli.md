@@ -5,22 +5,6 @@ rosdepc install -v --rosdistro=humble --from-paths src/package_name
 前提是package.xml里有类似的行：
 `<depend>rclpy</depend>`
 
-# topic
-
-话题相关
-## 查看目前的topic
-```bash
-ros2 topic list
-```
-或用rqt查看
-## 查看topic来源
-```bash
-ros2 topic info /joint_states
-```
-## 查看topic-msg 内容
-```bash
-ros2 interfaces show sensor_msgs/msg/JointState
-```
 
 # 创建功能包
 
@@ -108,35 +92,7 @@ name of the maintainer of this package
 colcon build --packages-select {pkg_name}
 ```
 
-# ros2 cli 
-
-## topic
-### 查看目前的topic
-```bash
-ros2 topic list
+# tf2 发布静态变换
 ```
-或用rqt查看
-
-### 查看topic来源
-```bash
-ros2 topic info /joint_states
+ros2 run tf2_ros static_transform_publisher 0 0 3 0 0 3.14 parent child
 ```
-返回：
-
-    Type: sensor_msgs/msg/JointState
-    Publisher count: 1
-    Subscription count: 1
-
-### 查看topic-msg 内容
-```bash
-ros2 interfaces show sensor_msgs/msg/JointState
-```
-返回
-
-    std_msgs/Header header
-
-    string[] name
-    float64[] position
-    float64[] velocity
-    float64[] effort
-##

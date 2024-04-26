@@ -102,6 +102,7 @@ multi_array_msg.data.capacity = 5;
 multi_array_msg.data.size = 5;
 multi_array_msg.data.data = (int32_t *)malloc(sizeof(int32_t) * 5);
 ``` 
+### 内存分配方式
 其中 `multi_array_msg.data.data = (int32_t *)malloc(sizeof(int32_t) * 5);`
 也可以改成
 ```
@@ -109,7 +110,67 @@ char array_buf[5];
 multi_array_msg.data.data=array_buf;
 ```
 或使用FreeRTOS 提供的`pvPortMalloc`
+### capacity 和 size
+.data.capacity 和.data.size是两个与数组管理相关的字段，它们有着不同的含义和用途：
 
+#### .data.capacity：
+
+    这个字段表示分配给.data.data数组的最大空间，即数组可以存储的最大元素数量。
+    在动态数组中，capacity决定了内存分配的大小，它通常是在数组创建时设定的，或者在需要更多空间时增加。
+    在这个例子中，.data.capacity = 5;意味着数组有足够的空间来存储5个int32_t类型的元素。
+#### .data.size：
+
+    这个字段表示数组中当前存储的元素数量。
+    它反映了数组实际使用的大小，而不是最大容量。
+    在这个例子中，.data.size = 5;表示数组中有5个元素被初始化，这与capacity相同，意味着数组已满。
+    在实际使用中，.data.size应当始终不大于.data.capacity。如果尝试添加超过capacity的元素，则需要先增加capacity以避免内存越界。当从数组中移除元素时，size会减少，但capacity保持不变，除非显式地减少它来释放内存。
+
+## 常用：JointState
+### 消息定义
+```
+std_msgs/Header header
+string[] name
+float64[] position
+float64[] velocity
+float64[] effort
+```
+
+### 分配内存
+```c
+
+    #define ARRAY_LEN 30 // String 数组长度
+    #define JOINT_DOUBLE_LEN 10 //关节数量
+	char joint_states_msg_buffer[ARRAY_LEN];
+	joint_states_msg.header.frame_id.data = joint_states_msg_buffer;
+	joint_states_msg.header.frame_id.size = 20;
+	joint_states_msg.header.frame_id.capacity = ARRAY_LEN;
+
+	rosidl_runtime_c__String string_buffer[JOINT_DOUBLE_LEN];
+	joint_states_msg.name.data = string_buffer;
+	joint_states_msg.name.size = 0;
+	joint_states_msg.name.capacity = JOINT_DOUBLE_LEN;
+
+	for(int i = 0; i < JOINT_DOUBLE_LEN; i++){
+		joint_states_msg.name.data[i].data = (char*) malloc(ARRAY_LEN);
+		joint_states_msg.name.data[i].size = 0;
+		joint_states_msg.name.data[i].capacity = ARRAY_LEN;
+	}
+
+	double joint_states_position_buffer[JOINT_DOUBLE_LEN];
+	joint_states_msg.position.data = joint_states_position_buffer;
+	joint_states_msg.position.size= 7;
+	joint_states_msg.position.capacity = JOINT_DOUBLE_LEN;
+
+	double joint_states_velocity_buffer[JOINT_DOUBLE_LEN];	
+	joint_states_msg.velocity.data = joint_states_velocity_buffer;
+	joint_states_msg.velocity.size = 7;
+	joint_states_msg.velocity.capacity = JOINT_DOUBLE_LEN;
+	
+	double joint_states_effort_buffer[JOINT_DOUBLE_LEN];	
+	joint_states_msg.effort.data = joint_states_effort_buffer;
+	joint_states_msg.effort.size = 7;
+	joint_states_msg.effort.capacity = JOINT_DOUBLE_LEN;
+```
 # Tips
 1. 可以使用Freertos创建其他线程，但是不要在其中使用micro_ros的内容，包括使用publisher等，会卡死
 2. 其他线程不运行,可能是microros任务占用了太多的内存导致其他任务初始化失败,方法:在cubeMX->FreeRTOS中增大TOTAL_HEAP_SIZE

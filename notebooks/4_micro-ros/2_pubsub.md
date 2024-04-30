@@ -24,6 +24,11 @@ rclc_publisher_init_default(
         printf("Error publishing (line %d)\n", __LINE__);
     }
 ```
+## 影响 publish 速度的因素
+1. 串口波特率(主要因素)
+2. publisher_init类型 `rclc_publisher_init_best_effort`比`rclc_publisher_init_default`快很多
+3. 消息大小(影响不大)
+4. DMA中断优先级(未知)
 ### 通过执行器发布
 见执行器一节
 

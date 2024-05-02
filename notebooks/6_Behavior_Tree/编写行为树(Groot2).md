@@ -11,12 +11,18 @@
 [ref](https://www.behaviortree.dev/docs/guides/scripting/)
 
 ### 使用xml
+4.5+版本
 ```xml
     <Script code=" msg:='hello world' " />
     <Script code=" A:=THE_ANSWER; B:=3.14; color:=RED " />
 ```
+3.8 版本
+```xml
+<SetBlackboard output_key="goal" value="0.0;map;2.0;0;0.0;0.0;0.0;0.0;1.0"/>
+```
 ### Groot2
-使用Ation->Script
+使用Action->Script(4.5+版本)
+使用Action->SetBlackboard(3.8版本)
 
 ## 具有通用类型的端口
 [ref](https://www.behaviortree.dev/docs/tutorial-basics/tutorial_03_generic_ports)

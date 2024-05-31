@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+  For instructions on using Groot and description of the following BehaviorTree nodes,
+  please refer to the groot_instructions.md and REAMDE.md respectively located in the
+  nav2_behavior_tree package.
+-->
+<root>
+  <TreeNodesModel>
+    <!-- ############################### ACTION NODES ################################# -->
+    
+
+    <!-- <Action ID="Wait">
+      <input_port name="wait_duration">Wait time</input_port>
+      <input_port name="server_name">Server name</input_port>
+      <input_port name="server_timeout">Server timeout</input_port>
+    </Action>
+
+    <Action ID="PutBall"></Action>
+
+    <Action ID="CatchBall">
+        <input_port name="time_allowance">Time allowance</input_port>
+        <input_port name="color">Color</input_port>
+    </Action> -->
+    <Action ID="SpinTo">
+        <input_port name="spin_direction">Spin direction</input_port>
+        <input_port name="time_allowance">Time allowance</input_port>
+        <input_port name="server_name">Server name</input_port>
+        <input_port name="server_timeout">Server timeout</input_port>
+    </Action>
+    <Action ID="RevolveJoints">
+        <input_port name="revolve_cmd"> </input_port>
+        <input_port name="expected_time"> </input_port>
+        <input_port name="is_absolute"> </input_port>
+    </Action>
+
+  </TreeNodesModel>
+</root>

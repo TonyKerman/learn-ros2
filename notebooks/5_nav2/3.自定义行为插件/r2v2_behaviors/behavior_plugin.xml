@@ -1,0 +1,14 @@
+<class_libraries>
+    <library path="r2v2_spin_to_behavior">
+        <class name="r2v2_behaviors/SpinTo" type="r2v2_behaviors::SpinTo"
+            base_class_type="nav2_core::Behavior">
+            <description></description>
+        </class>
+    </library>
+    <library path="r2v2_revolve_joints_behavior">
+        <class name="r2v2_behaviors/RevolveJoints" type="r2v2_behaviors::RevolveJoints"
+            base_class_type="nav2_core::Behavior">
+            <description></description>
+        </class>
+    </library>
+</class_libraries>

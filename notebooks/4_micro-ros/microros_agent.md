@@ -23,6 +23,10 @@ Available arguments (per transport):
 默认 -v4
 * -v5 显示接收/发送时间
 * -v6 显示接收/发送时间及消息十六进制内容
+
+### agent连不上下位机
+具体表现: 下位机重新烧录后,agent一直显示`session re-established`
+解决: 关闭agent,下位机断电,打开agent,下位机上电
 ## vscode 任务
 ```json
     "version": "2.0.0",

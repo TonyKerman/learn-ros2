@@ -1,3 +1,9 @@
+
+# 一键安装
+```bash
+wget http://fishros.com/install -O fishros && . fishros
+```
+
 # Install ROS2 with docker
 
 1. install docker via apt

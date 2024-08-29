@@ -25,8 +25,9 @@ The time at which we want to transform
 
 提供 tf2::TimePointZero 只会让我们获得最新的可用转换。所有这些都封装在一个 try-catch 块中，以处理可能的异常。
 ```cpp
-    std::string fromFrameRel = "map";
     std::string toFrameRel = "base_link";
+    std::string fromFrameRel = "map";
+    
 void timer_callback()
 {
     geometry_msgs::msg::TransformStamped t = tf_buffer_->lookupTransform(toFrameRel, fromFrameRel,tf2::TimePointZero);    
@@ -34,6 +35,20 @@ void timer_callback()
 
 ```
 生成的变换表示目标龟相对于 turtle2 的位置和方向。然后使用海龟之间的角度来计算跟随目标海龟的速度命令。有关 tf2 的更多常规信息，另请参阅“概念”部分中的 tf2 页面。
+## 使用
+```cpp
+int main(){
+    tf_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
+    tf_->setUsingDedicatedThread(true);
+    tf_listener_ =std::make_shared<tf2_ros::TransformListener>(*tf_, this, false);
+    for(;;)
+    {
+        if (!getCurrentPose(current_pose, *tf_, "map", "base_link", 0.1))
+        RCLCPP_ERROR(this->get_logger(), "Current robot pose is not available.\n\n\n");
+    }
+}
+
+```
 ## nav2 实现
 .h
 ```cpp
@@ -124,19 +139,6 @@ bool transformPoseInTargetFrame(
   return false;
 }
 ```
-使用
-```cpp
-int main(){
-    tf_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
-    tf_->setUsingDedicatedThread(true);
-    tf_listener_ =std::make_shared<tf2_ros::TransformListener>(*tf_, this, false);
-    for(;;)
-    {
-        if (!getCurrentPose(current_pose, *tf_, "map", "base_link", 0.1))
-        RCLCPP_ERROR(this->get_logger(), "Current robot pose is not available.\n\n\n");
-    }
-}
 
-```
 
 ROS2使用四元数来跟踪和应用旋转。一个四元数有4个组成部分(x, y, z, w)。在ROS2中，w是最后一位，但在其他库如Eigen中，w却是放在第一位。

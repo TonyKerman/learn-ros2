@@ -3,6 +3,12 @@
 ```bash
 wget http://fishros.com/install -O fishros && . fishros
 ```
+先安装ros2，再安装rosdepc，再执行
+```
+rosdepc init
+rosdecp update
+```
+完成rosdepc安装
 
 # Install ROS2 with docker
 

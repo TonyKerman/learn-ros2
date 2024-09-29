@@ -1,10 +1,23 @@
 # rosdep 安装依赖
+更推荐fishros的`rosdepc`
 ```bash
-rosdepc install -v --rosdistro=humble --from-paths src/package_name
+rosdep install -v --rosdistro=humble --from-paths src/package_name
 ```
 前提是package.xml里有类似的行：
 `<depend>rclpy</depend>`
 
+# colcon 编译
+```bash
+colcon build --packages-select {pkg_name}
+```
+## 常用参数
+* `--symbol-install`
+* `--ament-cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1` 设置编译变量，配合`Clang`插件使用
+
+# tf2 发布静态变换
+```
+ros2 run tf2_ros static_transform_publisher 0 0 3 0 0 3.14 parent child
+```
 
 # 创建功能包
 
@@ -29,70 +42,4 @@ ros2 pkg create example_ros2_interfaces --build-type ament_cmake --dependencies 
 
 Create a new ROS 2 package
 
-### positional arguments 参数
 
-package_name          The package name
-
-#### options
-
--
-
-    -h, --help            
-
-show this help message and exit
-
--
-
-    --destination-directory DESTINATION_DIRECTORY
-
-Directory where to create the package directory 创建包的位置，一般在工作区/src
-
--
-
-    --build-type {cmake,ament_cmake,ament_python}
-
-The build type to process the package with 包类型
-
--
-
-    --dependencies DEPENDENCIES [DEPENDENCIES ...]
-
-list of dependencies 依赖
-
--
-
-    --node-name NODE_NAME
-
-name of the empty executable 初始化一个节点，具体是修改setup.py和新建一个python文件
-
-不太重要的：
-
-- --maintainer-email MAINTAINER_EMAIL
-
-email address of the maintainer of this package
-
-- --maintainer-name MAINTAINER_NAME
-
-name of the maintainer of this package
-
-- --package-format {2,3}, --package_format {2,3}
-                        The package.xml format.
-
-- --description DESCRIPTION
-                        The description given in the package.xml
-
-- --license LICENSE     The license attached to this package; this can be an arbitrary string, but a LICENSE file will only be generated if
-                        it is one of the supported licenses (pass '?' to get a list)
-
-- --library-name LIBRARY_NAME
-                        name of the empty library
-
-# colcon 编译
-```bash
-colcon build --packages-select {pkg_name}
-```
-
-# tf2 发布静态变换
-```
-ros2 run tf2_ros static_transform_publisher 0 0 3 0 0 3.14 parent child
-```

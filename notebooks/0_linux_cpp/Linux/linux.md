@@ -62,3 +62,11 @@ useradd是一个指令，如果不使用任何选项，创建的用户将无密�
 
 # vscode python缩进报错
  shift+ctrl+P 将缩进转换为空格
+
+# 远程桌面
+
+sunshine+moonlight方案
+
+sunshine安装在linux上
+* 需要显示诱骗器
+* 设置->用户->打开自动登录

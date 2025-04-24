@@ -10,7 +10,23 @@
 1. 版本老,ui简陋
 2. gazebo官方不再更新
 3. 没有详细ros2教程
+## gazebo 打不开
+### 问题
+终端下输入gazebo命令无反应，不会启动gazebo
+### 解决
+终端下输入命令：
+```bash
+gazebo --verbose
+```
+若输出无红字报错，则`gazebo`已安装，
+打不开应该是正在下载模型库。
 
+可以手动下载模型库
+```bash
+cd ~/.gazebo
+git clone https://github.com/osrf/gazebo_models # 很慢
+mv gazebo_models models
+```
 ## gz sim
 教程来源 [gazebo官方网站](https://gazebosim.org/docs/harmonic)
 ### 优点
@@ -22,4 +38,3 @@
 2. 需要掌握相关 命令行命令
 3. 使用`gazebo-ros-brige` 与ros2通信
 
-因为 Gazebo-classic 没有详细教程,故使用 gz sim
